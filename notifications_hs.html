@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: white;
+            padding: 20px;
+        }
+        .navbar {
+            background-color: lightblue;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .navbar a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+        }
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+        .timestamp {
+            font-size: 0.9em;
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index_hs.html">Home</a>
+        <a href="manage-wallet_hs.html">Top Up Wallet</a>
+        <a href="set-spending-limit_hs.html">Set Spending Limit</a>
+    </div>
+    <div class="container">
+        <h1>Notifications</h1>
+        <h2>Incorrect Password Attempts:</h2>
+        <ul id="incorrectAttempts"></ul>
+
+        <h2>Transfers Exceeding Limit:</h2>
+        <ul id="exceedingTransfers"></ul>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Display incorrect password attempts
+            const attempts = JSON.parse(localStorage.getItem('incorrectAttempts')) || [];
+            const attemptsList = document.getElementById('incorrectAttempts');
+            attempts.forEach(attempt => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Incorrect password attempt`;
+                
+                const timestamp = document.createElement('div');
+                timestamp.textContent = `Occurred on: ${new Date(attempt).toLocaleString()}`;
+                timestamp.className = 'timestamp';
+
+                listItem.appendChild(timestamp);
+                attemptsList.appendChild(listItem);
+            });
+
+            // Display transfers exceeding limit
+            const transfers = JSON.parse(localStorage.getItem('exceedingTransfers')) || [];
+            const transfersList = document.getElementById('exceedingTransfers');
+            transfers.forEach(transfer => {
+                const listItem = document.createElement('li');
+                listItem.textContent = `Transfer of $${transfer.amount} to ${transfer.recipient}`;
+                
+                const timestamp = document.createElement('div');
+                timestamp.textContent = `Occurred on: ${new Date(transfer.date).toLocaleString()}`;
+                timestamp.className = 'timestamp';
+
+                listItem.appendChild(timestamp);
+                transfersList.appendChild(listItem);
+            });
+        });
+    </script>
+</body>
+</html>
+
+

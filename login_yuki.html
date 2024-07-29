@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <title>Log In</title>
+    <style>
+        input[type="email"], input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #3b82f6;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .signup-btn {
+            background-color: white;
+            color: #3b82f6;
+            border: 1px solid #ddd;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+        .footer {
+            margin-top: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* New styles for the footer */
+        .footer_section {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        color: #333; /* Text color */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Login Form -->
+    <div style="display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial, sans-serif; background-color: #f9f9f9; margin: 0;">
+        <div class="login-container" style="padding: 40px; border-radius: 8px; width: 600px; max-width: 80%; margin-bottom: 5%;">
+            <h2 style="margin-bottom: 20px;">Login</h2>
+            <form id="login-form">
+                <label for="email">Email*</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+                <label for="password">Password*</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <button type="submit">Login</button>
+            </form>
+            <div class="footer">
+                Don't have an account? <a href="/signup_yuki.html">Sign up</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to handle login/logout button display and redirection -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // List of hardcoded users
+            const users = [
+                { email: "user1@example.com", password: "password123" },
+                { email: "user2@example.com", password: "mypassword" }
+            ];
+
+            // Check login state
+            const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+            const loginBtn = document.getElementById("login-btn");
+            const signupBtn = document.getElementById("signup-btn");
+            const logoutBtn = document.getElementById("logout-btn");
+
+            // Handle login form submission
+            document.getElementById("login-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+
+                // Check if the provided email and password match any user in the list
+                const user = users.find(u => u.email === email && u.password === password);
+
+                if (user) {
+                    // Login successful
+                    localStorage.setItem("isLoggedIn", "true");
+                    // Redirect to homepage
+                    window.location.href = "/test_yuki.html";
+                } else {
+                    alert("Invalid email or password");
+                }
+            });
+        });
+
+        // Logout function
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "/login_yuki.html";
+        }
+
+        // Handle signup and redirect to login page
+        if (window.location.pathname === "/signup_yuki.html") {
+            document.getElementById("signup-form").addEventListener("submit", function(event) {
+                event.preventDefault();
+                // Perform signup logic here
+                // After signup, redirect to login page
+                window.location.href = "/login_yuki.html";
+            });
+        }
+    </script>
+
+<!-- Footer Section -->
+<div class="footer_section">
+    <p>Done by: Yuki</p>
+</div>
+</body>
+</html>

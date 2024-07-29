@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Digital Wallet</title>
+<style>
+/* Existing CSS */
+* {box-sizing: border-box}
+body {font-family: "Lato", sans-serif;}
+.tab {
+  float: left;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+  width: 20%;
+  height: 620px;
+}
+.tab button {
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 17px;
+}
+.tab button:hover {
+  background-color: #ddd;
+}
+.tab button.active {
+  background-color: #ccc;
+}
+.tabcontent {
+  float: left;
+  padding: 0px 12px;
+  border: 1px solid #ccc;
+  width: 80%;
+  border-left: none;
+  height: 620px;
+  font-size: 15px;
+}
+input[type="text"],
+input[type="number"] {
+  width: 100%;
+  padding: 12px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  font-size: 20px;
+}
+input[type="submit"], button {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 20px;
+  cursor: pointer;
+}
+#bankTransferSubmit {
+  background-color: blue;
+  color: white;
+}
+#walletSave, .btn-primary {
+  background-color: green;
+  color: white;
+}
+#walletEdit {
+  background-color: orange;
+  color: white;
+}
+#walletDelete {
+  background-color: red;
+  color: white;
+}
+#applePayDeposit {
+  background-color: purple;
+  color: white;
+}
+input[type="submit"]:hover, button:hover {
+  background-color: #45a049;
+}
+#apple-pay-button {
+  display: none;
+  -webkit-appearance: -apple-pay-button;
+  appearance: -apple-pay-button;
+  -apple-pay-button-type: buy;
+  width: 100%;
+  height: 44px;
+  margin-top: 20px;
+}
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+.wallet-container {
+  padding: 20px;
+  width: 400px;
+  text-align: center;
+}
+.transaction-history ul {
+  list-style: none;
+  padding: 0;
+}
+.transaction-history li {
+  background-color: #f9f9f9;
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 5px;
+  text-align: left;
+}
+.small-icon {
+  width: 40px;
+  height: auto;
+}
+
+/* New styles for the footer */
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 10px;
+  color: #333; /* Text color */
+}
+</style>
+</head>
+<body>
+
+<div class="tab">
+  <button class="tablinks" onclick="openCity(event, 'London')" id="defaultOpen">Bank Transfer</button>
+  <br>
+  <br>
+  <button class="tablinks" onclick="openCity(event, 'Paris')">Wallet</button>
+  <br>
+  <br>
+  <button class="tablinks" onclick="openCity(event, 'Tokyo')">ApplePay</button>
+  <br>
+  <br>
+  <button class="tablinks" onclick="openCity(event, 'China')">Transaction History</button>
+</div>
+
+<div id="London" class="tabcontent">
+  <h3>Bank Transfer</h3>
+  <form id="bankTransferForm" onsubmit="submitBankTransfer(event)">
+    <label for="sender-account">Sender's Account:</label><br>
+    <input type="text" id="sender-account" name="sender-account" required><br><br>
+    <label for="receiver-account">Receiver's Account:</label><br>
+    <input type="text" id="receiver-account" name="receiver-account" required><br><br>
+    <label for="amount">Amount:</label><br>
+    <input type="number" id="amount" name="amount" required><br><br>
+    <label for="description">Description:</label><br>
+    <input type="text" id="description" name="description"><br><br>
+    <input type="submit" value="Submit" id="bankTransferSubmit">
+  </form>
+</div>
+
+<div id="Paris" class="tabcontent">
+  <h3>Wallet</h3>
+  <form id="walletForm" onsubmit="saveCardDetails(event)">
+    <label for="card-number">Card Number:</label><br>
+    <input type="text" id="card-number" name="card-number" required><br><br>
+    <label for="card-holder">Card Holder:</label><br>
+    <input type="text" id="card-holder" name="card-holder" required><br><br>
+    <label for="expiry-date">Expiry Date:</label><br>
+    <input type="text" id="expiry-date" name="expiry-date" required><br><br>
+    <label for="cvv">CVV:</label><br>
+    <input type="number" id="cvv" name="cvv" required><br><br>
+    <input type="submit" value="Save" id="walletSave">
+  </form>
+  <button onclick="editCardDetails()" id="walletEdit">Edit Card Details</button>
+  <button onclick="deleteCardDetails()" id="walletDelete">Delete Card Details</button>
+</div>
+
+<div id="Tokyo" class="tabcontent">
+  <h3>
+    <img src="applelogo.png" class="small-icon" style="vertical-align: middle; margin-right: 5px;">
+    ApplePay
+  </h3>
+  <div class="wallet-container">
+    <label for="pay-amount">Pay Amount:</label><br>
+    <input type="number" id="pay-amount" name="pay-amount" required><br><br>
+    <button onclick="deposit()" id="applePayDeposit">
+      <img src="applelogo.png" class="small-icon" style="vertical-align: middle; margin-right: 5px;">
+      ApplePay
+    </button>
+  </div>
+</div>
+
+<div id="China" class="tabcontent">
+  <h3>Transaction History</h3>
+  <div class="transaction-history">
+    <ul id="history"></ul>
+  </div>
+</div>
+
+<script>
+function openCity(evt, cityName) {
+  var i, tabcontent, tablinks;
+  tabcontent = document.getElementsByClassName("tabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+  tablinks = document.getElementsByClassName("tablinks");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].className = tablinks[i].className.replace(" active", "");
+  }
+  document.getElementById(cityName).style.display = "block";
+  evt.currentTarget.className += " active";
+  if (cityName === 'Paris') {
+    loadCardDetails();
+  }
+  if (cityName === 'Tokyo') {
+    initializeApplePay();
+  }
+}
+
+document.getElementById("defaultOpen").click();
+
+function submitBankTransfer(event) {
+  event.preventDefault();
+  const sender = document.getElementById('sender-account').value;
+  const receiver = document.getElementById('receiver-account').value;
+  const amount = parseFloat(document.getElementById('amount').value);
+  const description = document.getElementById('description').value;
+  
+  if (!isNaN(amount) && amount > 0) {
+    addToHistory('Bank Transfer', amount, `From: ${sender}\nTo: ${receiver}\nDescription: ${description}`);
+    alert("Bank transfer successful!");
+    document.getElementById("bankTransferForm").reset();
+  } else {
+    alert('Please enter a valid amount');
+  }
+}
+
+function saveCardDetails(event) {
+  event.preventDefault();
+  const cardNumber = document.getElementById('card-number').value;
+  const cardHolder = document.getElementById('card-holder').value;
+  const expiryDate = document.getElementById('expiry-date').value;
+  const cvv = document.getElementById('cvv').value;
+
+  const cardDetails = {
+    cardNumber,
+    cardHolder,
+    expiryDate,
+    cvv
+  };
+
+  localStorage.setItem('cardDetails', JSON.stringify(cardDetails));
+  alert("Card details saved successfully!");
+  document.getElementById("walletForm").reset();
+}
+
+function loadCardDetails() {
+  const cardDetails = JSON.parse(localStorage.getItem('cardDetails'));
+  if (cardDetails) {
+    document.getElementById('card-number').value = cardDetails.cardNumber;
+    document.getElementById('card-holder').value = cardDetails.cardHolder;
+    document.getElementById('expiry-date').value = cardDetails.expiryDate;
+    document.getElementById('cvv').value = cardDetails.cvv;
+  }
+}
+
+function editCardDetails() {
+  document.getElementById('card-number').disabled = false;
+  document.getElementById('card-holder').disabled = false;
+  document.getElementById('expiry-date').disabled = false;
+  document.getElementById('cvv').disabled = false;
+  loadCardDetails();
+}
+
+function deleteCardDetails() {
+  localStorage.removeItem('cardDetails');
+  alert("Card details deleted successfully!");
+  document.getElementById("walletForm").reset();
+}
+
+function initializeApplePay() {
+  if (window.ApplePaySession && ApplePaySession.canMakePayments()) {
+    const applePayButton = document.getElementById('apple-pay-button');
+    applePayButton.style.display = 'block';
+  }
+}
+
+let balance = 0;
+const amountInput = document.getElementById('pay-amount');
+const historyElement = document.getElementById('history');
+
+function updateBalance() {
+  balanceElement.textContent = balance.toFixed(2);
+}
+
+function addToHistory(action, amount, details = '') {
+  const li = document.createElement('li');
+  li.textContent = `${action}: $${amount.toFixed(2)} ${details}`;
+  historyElement.appendChild(li);
+}
+
+function deposit() {
+  const amount = parseFloat(amountInput.value);
+  if (!isNaN(amount) && amount > 0) {
+    balance += amount;
+    amountInput.value = '';
+    addToHistory('Apple Pay', amount);
+    alert('Apple Pay transaction successful!');
+  } else {
+    alert('Please enter a valid amount');
+  }
+}
+
+</script>
+<!-- Footer Section -->
+<div class="footer">
+  <p>Done by: Yuki</p>
+</div>
+</body>
+</html>

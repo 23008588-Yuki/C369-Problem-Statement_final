@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Wallet</title>
+    <style>
+        /* Your existing styles */
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index_hs.html">Home</a>
+        <a href="set-spending-limit_hs.html">Set Spending Limit</a>
+        <a href="notifications_hs.html">Notifications</a>
+    </div>
+    <div class="container">
+        <h1>Manage Wallet</h1>
+        <form id="transferForm">
+            <label for="recipient">Recipient:</label>
+            <input type="text" id="recipient" name="recipient" required>
+
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" step="0.01" min="0" required>
+
+            <button type="submit">Transfer Money</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        const spendingLimit = parseFloat(localStorage.getItem('spendingLimit')) || Infinity;
+
+        document.getElementById('transferForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const recipient = document.getElementById('recipient').value;
+            const amount = parseFloat(document.getElementById('amount').value);
+
+            // Validate transfer
+            if (amount > spendingLimit) {
+                // Record the exceeding transfer
+                let transfers = JSON.parse(localStorage.getItem('exceedingTransfers')) || [];
+                transfers.push({ recipient, amount, date: new Date().toISOString() });
+                localStorage.setItem('exceedingTransfers', JSON.stringify(transfers));
+                document.getElementById('responseMessage').textContent = `Transfer of $${amount} to ${recipient} exceeds the spending limit.`;
+            } else {
+                document.getElementById('responseMessage').textContent = `Successfully transferred $${amount} to ${recipient}.`;
+            }
+        });
+    </script>
+</body>
+</html>
+

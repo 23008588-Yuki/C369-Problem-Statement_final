@@ -1,0 +1,120 @@
+/* General styles */
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Container styles */
+.container, .learning-container, .game-container {
+    background-color: #1f1f1f;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.container:hover, .learning-container:hover, .game-container:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Header styles */
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+    color: #90caf9; /* Light blue */
+}
+
+h2 {
+    font-size: 2em;
+    margin-bottom: 0.5em;
+}
+
+/* Button styles */
+button {
+    background-color: #2979ff; /* Blue */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 15px 30px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+}
+
+button:hover {
+    background-color: #1565c0; /* Darker blue */
+}
+
+/* Selection and game styles */
+.selection, .game-selection {
+    margin-top: 20px;
+}
+
+.selection button, .game-selection button {
+    margin: 10px;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+}
+
+.lesson, .quiz, .game-content {
+    margin-top: 20px;
+}
+
+.quiz {
+    display: none;
+}
+
+/* Form input styles */
+.budget-category {
+    margin: 10px 0;
+}
+
+.budget-category label {
+    font-size: 1.1em;
+    margin-right: 10px;
+    color: #e0e0e0;
+}
+
+.budget-category input {
+    border: 1px solid #424242;
+    border-radius: 5px;
+    padding: 10px;
+    width: calc(100% - 60px);
+    box-sizing: border-box;
+    background-color: #333;
+    color: #e0e0e0;
+}
+
+/* Answer button styles */
+.answer {
+    display: block;
+    background-color: #2979ff; /* Blue */
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 5px 0;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.answer:hover {
+    background-color: #1565c0; /* Darker blue */
+}
+
+/* Feedback styles */
+#feedback, #budget-feedback {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 1.2em;
+}

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Set Spending Limit</title>
+    <style>
+        /* Your existing styles */
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index_hs.html">Home</a>
+        <a href="manage-wallet_hs.html">Manage Wallet</a>
+        <a href="notifications_hs.html">Notifications</a>
+    </div>
+    <div class="container">
+        <h1>Set Spending Limit</h1>
+        <form id="limitForm">
+            <label for="spendingLimit">Spending Limit:</label>
+            <input type="number" id="spendingLimit" name="spendingLimit" step="0.01" min="0" required>
+            
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+            
+            <button type="submit">Set Limit</button>
+        </form>
+        <p id="responseMessage"></p>
+    </div>
+
+    <script>
+        const correctPassword = 'yourSecurePassword'; // Password for checking
+
+        document.getElementById('limitForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Get form data
+            const spendingLimit = parseFloat(document.getElementById('spendingLimit').value);
+            const password = document.getElementById('password').value;
+
+            // Store limit and validate password
+            if (password === correctPassword) {
+                if (spendingLimit >= 0) {
+                    // Save the spending limit
+                    localStorage.setItem('spendingLimit', spendingLimit);
+                    document.getElementById('responseMessage').textContent = `Spending limit set to $${spendingLimit}.`;
+                } else {
+                    document.getElementById('responseMessage').textContent = 'Please enter a valid spending limit.';
+                }
+            } else {
+                // Record incorrect password attempt
+                let attempts = JSON.parse(localStorage.getItem('incorrectAttempts')) || [];
+                attempts.push(new Date().toISOString());
+                localStorage.setItem('incorrectAttempts', JSON.stringify(attempts));
+                document.getElementById('responseMessage').textContent = 'Incorrect password.';
+            }
+        });
+    </script>
+</body>
+</html>
+
+

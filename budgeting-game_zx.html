@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budgeting Game</title>
+    <link rel="stylesheet" href="styles_zx.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>Budgeting Game</h1>
+        <p>Welcome to the Budgeting Game! Let's learn how to manage a budget effectively.</p>
+        <div class="game-content">
+            <p>You have $1000 to spend for the month. Allocate your budget to different categories:</p>
+            <div class="budget-category">
+                <label for="food">Food: </label>
+                <input type="number" id="food" value="0">
+            </div>
+            <div class="budget-category">
+                <label for="rent">Rent: </label>
+                <input type="number" id="rent" value="0">
+            </div>
+            <div class="budget-category">
+                <label for="entertainment">Entertainment: </label>
+                <input type="number" id="entertainment" value="0">
+            </div>
+            <button onclick="calculateBudget()">Submit</button>
+            <div id="budget-feedback"></div>
+        </div>
+    </div>
+    <script src="scripts_zx.js"></script>
+</body>
+</html>

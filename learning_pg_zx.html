@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Learning</title>
+    <link rel="stylesheet" href="styles_zx.css">
+</head>
+<body>
+    <div class="learning-container">
+        <h1>Interactive Financial Education</h1>
+        <div class="lesson">
+            <h2>Lesson 1: Understanding Budgeting</h2>
+            <p>A budget is a plan for your future income and expenses. It helps you manage your money effectively.</p>
+            <button onclick="showQuiz()">Take the Quiz</button>
+        </div>
+        <div class="quiz" id="quiz-section">
+            <h2>Quiz: What is a Budget?</h2>
+            <div class="question-container">
+                <p id="question">What is the definition of a budget?</p>
+                <button class="answer" onclick="checkAnswer(this)">A plan for future expenses</button>
+                <button class="answer" onclick="checkAnswer(this)">A type of investment</button>
+                <button class="answer" onclick="checkAnswer(this)">A savings account</button>
+                <button class="answer" onclick="checkAnswer(this)">A credit score</button>
+            </div>
+            <div id="feedback"></div>
+        </div>
+    </div>
+    <script src="scripts_zx.js"></script>
+</body>
+</html>

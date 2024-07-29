@@ -1,0 +1,73 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header {
+    background: #4CAF50;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+}
+
+header .container {
+    padding: 0 2rem;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.category-box {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-box h2 {
+    margin: 0;
+    color: #4CAF50;
+}
+
+.category-box img {
+    width: 80px; /* Adjusted width for better alignment */
+    height: auto; /* Maintain the aspect ratio */
+    margin-top: 1rem;
+    border-radius: 5px;
+}
+
+/* New Add Box Styles */
+.add-box {
+    background: #e1f5fe;
+    border: 2px dashed #4CAF50;
+    cursor: pointer;
+}
+
+.add-box img {
+    width: 60px; /* Slightly smaller icon */
+}
+
+.add-box h2 {
+    color: #4CAF50;
+}
